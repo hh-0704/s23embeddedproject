@@ -60,14 +60,14 @@ ___
 
 2. **아기 울음 소리 감지**
    - 음압 센서를 통해 아기 울음 소리가 감지되면 Twilio API를 활용하여 SMS를 부모의 핸드폰으로 발송합니다.
-   - 동시에 시스템의 액추레이터들이 작동됩니다.
+   - 동시에 시스템의 액추에이터들이 작동됩니다.
 
-3. **액추레이터 동작**
+3. **액추에이터 동작**
    - SMS 발송은 한 번의 울음 소리를 감지하면 한 번 발송되고, 발송 후 일정 시간 동안 Delay를 가지게 됩니다.
-   - 아기 울음 소리가 감지될 때까지 액추레이터들이 동작하며, 감지 모드로 들어가고 처음의 프로그램 흐름으로 돌아가게 됩니다.
+   - 아기 울음 소리가 감지될 때까지 액추에이터들이 동작하며, 감지 모드로 들어가고 처음의 프로그램 흐름으로 돌아가게 됩니다.
 
 4. **아기 울음 소리 미감지**
-   - 아기 울음 소리가 더 이상 감지되지 않으면 액추레이터들의 동작이 천천히 정지됩니다.
+   - 아기 울음 소리가 더 이상 감지되지 않으면 액추에이터들의 동작이 천천히 정지됩니다.
    - 다시 음압 센서는 [음압 체크](#31-프로그램-흐름)로 진입하며, 프로그램 흐름이 처음으로 돌아가게 됩니다.
 
 ### 3.2 제한 조건 구현 내용
@@ -83,8 +83,8 @@ ___
    - 이로써 여러 스레드에서 동시에 해당 변수에 접근하는 것을 방지하고, 안전한 수정 및 공유 자원의 접근이 가능합니다.
 
 3. **동시 실행 제어**
-   - 아기 울음소리가 감지될 경우, 해당 값이 변하고 뮤텍스를 이용하여 동시에 여러 액추레이터 실행 함수들이 동작하지 않도록 제한하였습니다.
-   - 각 액추레이터 실행 함수들은 동작을 마치면 자식 스레드로 돌아가 아기 울음소리 감지 함수를 다시 멀티 스레딩으로 수행합니다.
+   - 아기 울음소리가 감지될 경우, 해당 값이 변하고 뮤텍스를 이용하여 동시에 여러 액추에이터 실행 함수들이 동작하지 않도록 제한하였습니다.
+   - 각 액추에이터 실행 함수들은 동작을 마치면 자식 스레드로 돌아가 아기 울음소리 감지 함수를 다시 멀티 스레딩으로 수행합니다.
 
 이를 통해 시스템은 안전하게 여러 스레드 간의 작업을 조율하고, 공유 자원을 안전하게 활용할 수 있습니다.
 
@@ -112,7 +112,6 @@ ___
 ___
 ## 5. 가산점 요소 구현
 <img width="100%" alt="image" src="https://private-user-images.githubusercontent.com/54587781/292126749-3b4da50d-3938-42a4-905b-636057f115ed.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTEiLCJleHAiOjE3MDMxNDU0NjgsIm5iZiI6MTcwMzE0NTE2OCwicGF0aCI6Ii81NDU4Nzc4MS8yOTIxMjY3NDktM2I0ZGE1MGQtMzkzOC00MmE0LTkwNWItNjM2MDU3ZjExNWVkLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFJV05KWUFYNENTVkVINTNBJTJGMjAyMzEyMjElMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjMxMjIxVDA3NTI0OFomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTExYTYxYjNhMWZmNWMwMWNjNjQwOTRhMjMyZTVhYzFkMGZjOTY3MTQxYzZlYTcyMjMyNmIxM2Q1ZDIxMmI2ZjcmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JmFjdG9yX2lkPTAma2V5X2lkPTAmcmVwb19pZD0wIn0.Qr9D0klh-nqVvcTIapYEiESmdywMDPrkpRfIRy_eVLk">
-
 ### 5.1 Twilio API를 통한 SMS 알림 전송 기능
 
 아이 울음 감지 시, Twilio API를 활용하여 SMS를 라즈베리파이에서 전송하는 기능을 구현하였습니다. 아래는 해당 기능을 수행하는 코드의 주요 내용과 작동 원리에 대한 설명입니다.
@@ -165,7 +164,7 @@ int sendsms() {
 결과 확인 및 리소스 정리: HTTP POST 요청 결과를 확인하고, libcurl 라이브러리를 사용한 작업이 끝나면 리소스를 정리합니다.
 ___
 ## 6. 데모 영상
-![image](https://github.com/hh-0704/s23embeddedproject/assets/54587781/3b8998be-45cc-4fc8-9128-d1f0606b1fea)
+![Alt text](image-5.png)
 [동영상 보기](https://youtu.be/5TMu_-2P28U?si=voKOteZzEPv62oCz)
 
 ---
