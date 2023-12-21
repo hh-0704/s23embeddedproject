@@ -1,5 +1,8 @@
 # 아이 울음 감지 및 대처 시스템 - 최종 보고서
 ## 목차
+
+- [아이 울음 감지 및 대처 시스템 - 최종 보고서](#아이-울음-감지-및-대처-시스템---최종-보고서)
+  - [목차](#목차)
   - [1. 아이디어 소개](#1-아이디어-소개)
   - [2. 전체 시스템 구조](#2-전체-시스템-구조)
     - [2.1 사운드 감지 모듈](#21-사운드-감지-모듈)
@@ -19,8 +22,7 @@
       - [5.1.2 SMS 메시지 내용 및 수신자 정보 설정](#512-sms-메시지-내용-및-수신자-정보-설정)
       - [5.1.3 libcurl을 사용한 HTTP POST 요청 및 콜백 함수 정의](#513-libcurl을-사용한-http-post-요청-및-콜백-함수-정의)
       - [5.1.4 Twilio API를 통한 SMS 전송 작동 원리](#514-twilio-api를-통한-sms-전송-작동-원리)
-  - [6. 기능별 데모 영상](#6-기능별-데모-영상)
-
+  - [6. 데모 영상](#6-데모-영상)
 
 ---
 
@@ -29,6 +31,7 @@
 우리 팀은 아이 울음을 감지하고 부모에게 신속하게 알림을 전송하여 아이를 진정시키고자 하는 아기케어 시스템을 개발하였습니다. 이 시스템은 사운드 센서를 통해 아이 울음소리를 감지하고, 부저를 통한 멜로디 출력, LED를 통한 조명 조절, 스텝 모터를 통한 모빌 동작 등 다양한 액추에이터를 활용하여 아이를 안정화시킵니다. 동시에, 아이 울음 감지 시 SMS를 통해 부모에게 알림을 전송하여 신속한 대처가 가능하도록 합니다.
 ___
 ## 2. 전체 시스템 구조
+<img width="100%" alt="image" src="https://private-user-images.githubusercontent.com/54587781/292125916-d6898a1a-1c7d-442f-829f-f366591c6fab.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTEiLCJleHAiOjE3MDMxNDU0NjgsIm5iZiI6MTcwMzE0NTE2OCwicGF0aCI6Ii81NDU4Nzc4MS8yOTIxMjU5MTYtZDY4OThhMWEtMWM3ZC00NDJmLTgyOWYtZjM2NjU5MWM2ZmFiLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFJV05KWUFYNENTVkVINTNBJTJGMjAyMzEyMjElMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjMxMjIxVDA3NTI0OFomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTQ1NjdkMmYzNTRlNjM5ZmRjYWVlODJlMTg1NDI4M2UyNWI2NDU0NThiOWRkM2Q4MjI0MGJiYTFmNGQ2YTI2NjMmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JmFjdG9yX2lkPTAma2V5X2lkPTAmcmVwb19pZD0wIn0.r9evIcELqsPbeOM5GKYhgkCzDXFjhzv4SqWkX2q44nw">
 
 ### 2.1 사운드 감지 모듈
 
@@ -89,10 +92,13 @@ ___
 ## 4. 개발과정에서의 문제점 및 해결방안
 
 ### 4.1 문제점: FFT 분석의 어려움
+<img width="80%" alt="image" src="https://github.com/hh-0704/s23embeddedproject/assets/54587781/ec3486d8-9b8c-4467-a97f-6d490ca92285">
 
 맨 처음에는 사운드 센서의 아날로그 값을 FFT를 통해 분석하여 특정 주파수 대역의 소리를 감지하려고 시도했습니다. 그러나 라즈베리파이 개발환경에서 정확한 FFT 분석이 어려웠습니다. 특히, 실험 환경에서 타겟 주파수 영역에 대한 정확한 피크값을 얻기 어려웠고, 특정 주파수에서의 노이즈만 도출되는 문제가 발생했습니다.
 
 ### 4.2 해결방안: 음압 데시벨을 통한 울음소리 감지 로직
+<img width="50%" alt="image" src="https://private-user-images.githubusercontent.com/54587781/292126598-635e19cb-ff25-48c6-a6b0-b9b1468b94ee.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTEiLCJleHAiOjE3MDMxNDUwNzYsIm5iZiI6MTcwMzE0NDc3NiwicGF0aCI6Ii81NDU4Nzc4MS8yOTIxMjY1OTgtNjM1ZTE5Y2ItZmYyNS00OGM2LWE2YjAtYjliMTQ2OGI5NGVlLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFJV05KWUFYNENTVkVINTNBJTJGMjAyMzEyMjElMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjMxMjIxVDA3NDYxNlomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTc2OWZkNjBhYjA5MTU0MDdmNzg2YzgxZTdmZjJkMTU3NjRhYzA1NjI3ZmVkNDMzYmQ5MjA1MTYyNmJkMTJlOWYmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JmFjdG9yX2lkPTAma2V5X2lkPTAmcmVwb19pZD0wIn0.I1LvuNYHa5WC8MhA59_bIl-03IB8sHk4CDyJ5xJpR9A"><img width="50%" alt="image" src="https://private-user-images.githubusercontent.com/54587781/292126620-50bd89cc-5328-44c2-b9a0-483f48047272.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTEiLCJleHAiOjE3MDMxNDUwNzYsIm5iZiI6MTcwMzE0NDc3NiwicGF0aCI6Ii81NDU4Nzc4MS8yOTIxMjY2MjAtNTBiZDg5Y2MtNTMyOC00NGMyLWI5YTAtNDgzZjQ4MDQ3MjcyLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFJV05KWUFYNENTVkVINTNBJTJGMjAyMzEyMjElMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjMxMjIxVDA3NDYxNlomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPWRiODQ2YTUxYTVjNDdlYjQ1YTQ2ZDdmMzA4ZDlkMTEzMjBkYjBhNTc4ZTYyNjYyZTMxZjVhZTJiMWJjZjRkODQmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JmFjdG9yX2lkPTAma2V5X2lkPTAmcmVwb19pZD0wIn0.3t_u4n4IDCEThVUy1hldClAkVmosBgEx_8ic-2lGpr8">
+
 
 - 원인 분석: 사운드 센서의 아날로그 값의 변동폭이 작아 라즈베리파이에서 FFT 분석에 부적합한 것으로 확인되었습니다. 성인 남성이 큰 소리로 말해도 아날로그 값의 변동이 제한적이었습니다.
 
@@ -105,7 +111,7 @@ ___
 - 향후 발전 가능성: 아두이노 우노 보드를 활용하여 사운드 센서의 아날로그 값을 정확하게 분석하는 방안을 고려할 수 있습니다. 이는 프로젝트를 추가적으로 발전시킬 때 고려해볼 수 있는 옵션입니다.
 ___
 ## 5. 가산점 요소 구현
-
+<img width="100%" alt="image" src="https://private-user-images.githubusercontent.com/54587781/292126749-3b4da50d-3938-42a4-905b-636057f115ed.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTEiLCJleHAiOjE3MDMxNDU0NjgsIm5iZiI6MTcwMzE0NTE2OCwicGF0aCI6Ii81NDU4Nzc4MS8yOTIxMjY3NDktM2I0ZGE1MGQtMzkzOC00MmE0LTkwNWItNjM2MDU3ZjExNWVkLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFJV05KWUFYNENTVkVINTNBJTJGMjAyMzEyMjElMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjMxMjIxVDA3NTI0OFomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTExYTYxYjNhMWZmNWMwMWNjNjQwOTRhMjMyZTVhYzFkMGZjOTY3MTQxYzZlYTcyMjMyNmIxM2Q1ZDIxMmI2ZjcmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JmFjdG9yX2lkPTAma2V5X2lkPTAmcmVwb19pZD0wIn0.Qr9D0klh-nqVvcTIapYEiESmdywMDPrkpRfIRy_eVLk">
 ### 5.1 Twilio API를 통한 SMS 알림 전송 기능
 
 아이 울음 감지 시, Twilio API를 활용하여 SMS를 라즈베리파이에서 전송하는 기능을 구현하였습니다. 아래는 해당 기능을 수행하는 코드의 주요 내용과 작동 원리에 대한 설명입니다.
@@ -157,8 +163,8 @@ int sendsms() {
 4. HTTP POST 요청 수행: libcurl을 사용하여 Twilio API에 HTTP POST 요청을 수행합니다.
 결과 확인 및 리소스 정리: HTTP POST 요청 결과를 확인하고, libcurl 라이브러리를 사용한 작업이 끝나면 리소스를 정리합니다.
 ___
-## 6. 기능별 데모 영상
-
-[데모 영상 보기](영상 링크)
+## 6. 데모 영상
+![image](https://github.com/hh-0704/s23embeddedproject/assets/54587781/3b8998be-45cc-4fc8-9128-d1f0606b1fea)
+[동영상 보기](https://youtu.be/5TMu_-2P28U?si=voKOteZzEPv62oCz)
 
 ---
