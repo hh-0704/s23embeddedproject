@@ -19,7 +19,7 @@
   - [5. 가산점 요소 구현](#5-가산점-요소-구현)
     - [5.1 Twilio API를 통한 SMS 알림 전송 기능](#51-twilio-api를-통한-sms-알림-전송-기능)
       - [5.1.1 Twilio 계정 정보 및 API 엔드포인트 설정](#511-twilio-계정-정보-및-api-엔드포인트-설정)
-      - [5.1.2 SMS 메시지 내용 설정](#512-sms-메시지-내용-설정)
+      - [5.1.2 SMS 메시지 내용 및 수신자 정보 설정](#512-sms-메시지-내용-및-수신자-정보-설정)
       - [5.1.3 libcurl을 사용한 HTTP POST 요청 및 콜백 함수 정의](#513-libcurl을-사용한-http-post-요청-및-콜백-함수-정의)
       - [5.1.4 Twilio API를 통한 SMS 전송 작동 원리](#514-twilio-api를-통한-sms-전송-작동-원리)
   - [6. 데모 영상](#6-데모-영상)
@@ -97,7 +97,25 @@ ___
 맨 처음에는 사운드 센서의 아날로그 값을 FFT를 통해 분석하여 특정 주파수 대역의 소리를 감지하려고 시도했습니다. 그러나 라즈베리파이 개발환경에서 정확한 FFT 분석이 어려웠습니다. 특히, 실험 환경에서 타겟 주파수 영역에 대한 정확한 피크값을 얻기 어려웠고, 특정 주파수에서의 노이즈만 도출되는 문제가 발생했습니다.
 
 ### 4.2 해결방안: 음압 데시벨을 통한 울음소리 감지 로직
-<img width="50%" alt="image" src="https://private-user-images.githubusercontent.com/54587781/292126598-635e19cb-ff25-48c6-a6b0-b9b1468b94ee.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTEiLCJleHAiOjE3MDMxNDUwNzYsIm5iZiI6MTcwMzE0NDc3NiwicGF0aCI6Ii81NDU4Nzc4MS8yOTIxMjY1OTgtNjM1ZTE5Y2ItZmYyNS00OGM2LWE2YjAtYjliMTQ2OGI5NGVlLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFJV05KWUFYNENTVkVINTNBJTJGMjAyMzEyMjElMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjMxMjIxVDA3NDYxNlomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTc2OWZkNjBhYjA5MTU0MDdmNzg2YzgxZTdmZjJkMTU3NjRhYzA1NjI3ZmVkNDMzYmQ5MjA1MTYyNmJkMTJlOWYmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JmFjdG9yX2lkPTAma2V5X2lkPTAmcmVwb19pZD0wIn0.I1LvuNYHa5WC8MhA59_bIl-03IB8sHk4CDyJ5xJpR9A"><img width="50%" alt="image" src="https://private-user-images.githubusercontent.com/54587781/292126620-50bd89cc-5328-44c2-b9a0-483f48047272.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTEiLCJleHAiOjE3MDMxNDUwNzYsIm5iZiI6MTcwMzE0NDc3NiwicGF0aCI6Ii81NDU4Nzc4MS8yOTIxMjY2MjAtNTBiZDg5Y2MtNTMyOC00NGMyLWI5YTAtNDgzZjQ4MDQ3MjcyLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFJV05KWUFYNENTVkVINTNBJTJGMjAyMzEyMjElMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjMxMjIxVDA3NDYxNlomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPWRiODQ2YTUxYTVjNDdlYjQ1YTQ2ZDdmMzA4ZDlkMTEzMjBkYjBhNTc4ZTYyNjYyZTMxZjVhZTJiMWJjZjRkODQmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JmFjdG9yX2lkPTAma2V5X2lkPTAmcmVwb19pZD0wIn0.3t_u4n4IDCEThVUy1hldClAkVmosBgEx_8ic-2lGpr8">
+
+<div style="display:flex; justify-content:space-around;"  >
+  <figure style="text-align:center;">
+    <img src="https://private-user-images.githubusercontent.com/54587781/292126598-635e19cb-ff25-48c6-a6b0-b9b1468b94ee.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTEiLCJleHAiOjE3MDMxNDUwNzYsIm5iZiI6MTcwMzE0NDc3NiwicGF0aCI6Ii81NDU4Nzc4MS8yOTIxMjY1OTgtNjM1ZTE5Y2ItZmYyNS00OGM2LWE2YjAtYjliMTQ2OGI5NGVlLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFJV05KWUFYNENTVkVINTNBJTJGMjAyMzEyMjElMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjMxMjIxVDA3NDYxNlomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTc2OWZkNjBhYjA5MTU0MDdmNzg2YzgxZTdmZjJkMTU3NjRhYzA1NjI3ZmVkNDMzYmQ5MjA1MTYyNmJkMTJlOWYmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JmFjdG9yX2lkPTAma2V5X2lkPTAmcmVwb19pZD0wIn0.I1LvuNYHa5WC8MhA59_bIl-03IB8sHk4CDyJ5xJpR9A"
+       style="width: 100%;">
+    <figcaption style="text-align:center; font-size:15px; color:#808080">
+      사운드 측정 전
+    </figcaption>
+  </figure>
+
+  <figure style="text-align:center;">
+    <img src="https://private-user-images.githubusercontent.com/54587781/292126620-50bd89cc-5328-44c2-b9a0-483f48047272.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTEiLCJleHAiOjE3MDMxNDUwNzYsIm5iZiI6MTcwMzE0NDc3NiwicGF0aCI6Ii81NDU4Nzc4MS8yOTIxMjY2MjAtNTBiZDg5Y2MtNTMyOC00NGMyLWI5YTAtNDgzZjQ4MDQ3MjcyLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFJV05KWUFYNENTVkVINTNBJTJGMjAyMzEyMjElMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjMxMjIxVDA3NDYxNlomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPWRiODQ2YTUxYTVjNDdlYjQ1YTQ2ZDdmMzA4ZDlkMTEzMjBkYjBhNTc4ZTYyNjYyZTMxZjVhZTJiMWJjZjRkODQmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JmFjdG9yX2lkPTAma2V5X2lkPTAmcmVwb19pZD0wIn0.3t_u4n4IDCEThVUy1hldClAkVmosBgEx_8ic-2lGpr8"
+       style="width: 100%;">
+    <figcaption style="text-align:center; font-size:15px; color:#808080">
+      사운드 측정 후
+    </figcaption>
+  </figure>
+</div>
+
 
 
 - 원인 분석: 사운드 센서의 아날로그 값의 변동폭이 작아 라즈베리파이에서 FFT 분석에 부적합한 것으로 확인되었습니다. 성인 남성이 큰 소리로 말해도 아날로그 값의 변동이 제한적이었습니다.
@@ -112,6 +130,7 @@ ___
 ___
 ## 5. 가산점 요소 구현
 <img width="100%" alt="image" src="https://private-user-images.githubusercontent.com/54587781/292126749-3b4da50d-3938-42a4-905b-636057f115ed.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTEiLCJleHAiOjE3MDMxNDU0NjgsIm5iZiI6MTcwMzE0NTE2OCwicGF0aCI6Ii81NDU4Nzc4MS8yOTIxMjY3NDktM2I0ZGE1MGQtMzkzOC00MmE0LTkwNWItNjM2MDU3ZjExNWVkLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFJV05KWUFYNENTVkVINTNBJTJGMjAyMzEyMjElMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjMxMjIxVDA3NTI0OFomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTExYTYxYjNhMWZmNWMwMWNjNjQwOTRhMjMyZTVhYzFkMGZjOTY3MTQxYzZlYTcyMjMyNmIxM2Q1ZDIxMmI2ZjcmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JmFjdG9yX2lkPTAma2V5X2lkPTAmcmVwb19pZD0wIn0.Qr9D0klh-nqVvcTIapYEiESmdywMDPrkpRfIRy_eVLk">
+
 ### 5.1 Twilio API를 통한 SMS 알림 전송 기능
 
 아이 울음 감지 시, Twilio API를 활용하여 SMS를 라즈베리파이에서 전송하는 기능을 구현하였습니다. 아래는 해당 기능을 수행하는 코드의 주요 내용과 작동 원리에 대한 설명입니다.
@@ -129,7 +148,7 @@ const char* TO_PHONE_NUMBER = "unknown";
 const char* TWILIO_SMS_URL = "https://api.twilio.com/2010-04-01/Accounts/AC1bfb25aab627bd95b5cd294e6981821d/Messages.json";
 ```
 
-#### 5.1.2 SMS 메시지 내용 설정
+#### 5.1.2 SMS 메시지 내용 및 수신자 정보 설정
 ```c
 // SMS 메시지 내용
 const char* SMS_BODY = "아기가 울어요!";
