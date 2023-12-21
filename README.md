@@ -112,6 +112,7 @@ ___
 ___
 ## 5. 가산점 요소 구현
 <img width="100%" alt="image" src="https://private-user-images.githubusercontent.com/54587781/292126749-3b4da50d-3938-42a4-905b-636057f115ed.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTEiLCJleHAiOjE3MDMxNDU0NjgsIm5iZiI6MTcwMzE0NTE2OCwicGF0aCI6Ii81NDU4Nzc4MS8yOTIxMjY3NDktM2I0ZGE1MGQtMzkzOC00MmE0LTkwNWItNjM2MDU3ZjExNWVkLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFJV05KWUFYNENTVkVINTNBJTJGMjAyMzEyMjElMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjMxMjIxVDA3NTI0OFomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTExYTYxYjNhMWZmNWMwMWNjNjQwOTRhMjMyZTVhYzFkMGZjOTY3MTQxYzZlYTcyMjMyNmIxM2Q1ZDIxMmI2ZjcmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JmFjdG9yX2lkPTAma2V5X2lkPTAmcmVwb19pZD0wIn0.Qr9D0klh-nqVvcTIapYEiESmdywMDPrkpRfIRy_eVLk">
+
 ### 5.1 Twilio API를 통한 SMS 알림 전송 기능
 
 아이 울음 감지 시, Twilio API를 활용하여 SMS를 라즈베리파이에서 전송하는 기능을 구현하였습니다. 아래는 해당 기능을 수행하는 코드의 주요 내용과 작동 원리에 대한 설명입니다.
