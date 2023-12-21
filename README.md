@@ -166,7 +166,8 @@ int sendsms() {
 결과 확인 및 리소스 정리: HTTP POST 요청 결과를 확인하고, libcurl 라이브러리를 사용한 작업이 끝나면 리소스를 정리합니다.
 ___
 ## 6. 데모 영상
-![Alt text](image-5.png)
+![image](https://github.com/hh-0704/s23embeddedproject/assets/54587781/bde70842-a3df-492b-be02-bf29c4433825)
+
 [동영상 보기](https://youtu.be/5TMu_-2P28U?si=voKOteZzEPv62oCz)
 
 ---
