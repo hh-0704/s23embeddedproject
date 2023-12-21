@@ -98,8 +98,8 @@ ___
 
 ### 4.2 해결방안: 음압 데시벨을 통한 울음소리 감지 로직
 
-| ![space-1.jpg](https://private-user-images.githubusercontent.com/54587781/292126598-635e19cb-ff25-48c6-a6b0-b9b1468b94ee.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTEiLCJleHAiOjE3MDMxNDUwNzYsIm5iZiI6MTcwMzE0NDc3NiwicGF0aCI6Ii81NDU4Nzc4MS8yOTIxMjY1OTgtNjM1ZTE5Y2ItZmYyNS00OGM2LWE2YjAtYjliMTQ2OGI5NGVlLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFJV05KWUFYNENTVkVINTNBJTJGMjAyMzEyMjElMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjMxMjIxVDA3NDYxNlomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTc2OWZkNjBhYjA5MTU0MDdmNzg2YzgxZTdmZjJkMTU3NjRhYzA1NjI3ZmVkNDMzYmQ5MjA1MTYyNmJkMTJlOWYmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JmFjdG9yX2lkPTAma2V5X2lkPTAmcmVwb19pZD0wIn0.I1LvuNYHa5WC8MhA59_bIl-03IB8sHk4CDyJ5xJpR9A) | ![image](https://private-user-images.githubusercontent.com/54587781/292126620-50bd89cc-5328-44c2-b9a0-483f48047272.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTEiLCJleHAiOjE3MDMxNDUwNzYsIm5iZiI6MTcwMzE0NDc3NiwicGF0aCI6Ii81NDU4Nzc4MS8yOTIxMjY2MjAtNTBiZDg5Y2MtNTMyOC00NGMyLWI5YTAtNDgzZjQ4MDQ3MjcyLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFJV05KWUFYNENTVkVINTNBJTJGMjAyMzEyMjElMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjMxMjIxVDA3NDYxNlomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPWRiODQ2YTUxYTVjNDdlYjQ1YTQ2ZDdmMzA4ZDlkMTEzMjBkYjBhNTc4ZTYyNjYyZTMxZjVhZTJiMWJjZjRkODQmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JmFjdG9yX2lkPTAma2V5X2lkPTAmcmVwb19pZD0wIn0.3t_u4n4IDCEThVUy1hldClAkVmosBgEx_8ic-2lGpr8)|
-|:--:|:--:|
+| ![그림1](https://github.com/Jeong-baechoo/s23embeddedproject/assets/54587781/d85e6e84-00d5-4c0c-91d1-f1af0540ceaa) | ![그림2](https://github.com/Jeong-baechoo/s23embeddedproject/assets/54587781/57e75056-755c-4ce0-919b-20d8f0ff1211) |
+| :--: |  :--: |
 | *사운드 측정 전* | *사운드 측정 후* |
 - 원인 분석: 사운드 센서의 아날로그 값의 변동폭이 작아 라즈베리파이에서 FFT 분석에 부적합한 것으로 확인되었습니다. 성인 남성이 큰 소리로 말해도 아날로그 값의 변동이 제한적이었습니다.
 
@@ -112,7 +112,8 @@ ___
 - 향후 발전 가능성: 아두이노 우노 보드를 활용하여 사운드 센서의 아날로그 값을 정확하게 분석하는 방안을 고려할 수 있습니다. 이는 프로젝트를 추가적으로 발전시킬 때 고려해볼 수 있는 옵션입니다.
 ___
 ## 5. 가산점 요소 구현
-<img width="100%" alt="image" src="https://private-user-images.githubusercontent.com/54587781/292126749-3b4da50d-3938-42a4-905b-636057f115ed.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTEiLCJleHAiOjE3MDMxNDU0NjgsIm5iZiI6MTcwMzE0NTE2OCwicGF0aCI6Ii81NDU4Nzc4MS8yOTIxMjY3NDktM2I0ZGE1MGQtMzkzOC00MmE0LTkwNWItNjM2MDU3ZjExNWVkLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFJV05KWUFYNENTVkVINTNBJTJGMjAyMzEyMjElMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjMxMjIxVDA3NTI0OFomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTExYTYxYjNhMWZmNWMwMWNjNjQwOTRhMjMyZTVhYzFkMGZjOTY3MTQxYzZlYTcyMjMyNmIxM2Q1ZDIxMmI2ZjcmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JmFjdG9yX2lkPTAma2V5X2lkPTAmcmVwb19pZD0wIn0.Qr9D0klh-nqVvcTIapYEiESmdywMDPrkpRfIRy_eVLk">
+<img width="981" alt="스크린샷 2023-12-21 오후 4 39 50" src="https://github.com/Jeong-baechoo/s23embeddedproject/assets/54587781/78777b4c-84c4-4f8d-9509-7dceb457c2cb">
+
 
 ### 5.1 Twilio API를 통한 SMS 알림 전송 기능
 
