@@ -31,7 +31,8 @@
 우리 팀은 아이 울음을 감지하고 부모에게 신속하게 알림을 전송하여 아이를 진정시키고자 하는 아기케어 시스템을 개발하였습니다. 이 시스템은 사운드 센서를 통해 아이 울음소리를 감지하고, 부저를 통한 멜로디 출력, LED를 통한 조명 조절, 스텝 모터를 통한 모빌 동작 등 다양한 액추에이터를 활용하여 아이를 안정화시킵니다. 동시에, 아이 울음 감지 시 SMS를 통해 부모에게 알림을 전송하여 신속한 대처가 가능하도록 합니다.
 ___
 ## 2. 전체 시스템 구조
-<img width="100%" alt="image" src="https://private-user-images.githubusercontent.com/54587781/292125916-d6898a1a-1c7d-442f-829f-f366591c6fab.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTEiLCJleHAiOjE3MDMxNDg1MTYsIm5iZiI6MTcwMzE0ODIxNiwicGF0aCI6Ii81NDU4Nzc4MS8yOTIxMjU5MTYtZDY4OThhMWEtMWM3ZC00NDJmLTgyOWYtZjM2NjU5MWM2ZmFiLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFJV05KWUFYNENTVkVINTNBJTJGMjAyMzEyMjElMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjMxMjIxVDA4NDMzNlomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPWY4NDJlNGRmNWNlNzM5MDQyNGZhZGZhZDFkMTJjMDM5ZjE2NGQ3ZjJhM2U3YTc4YTc0OTNiMzg1ZTkwNzgzNjMmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JmFjdG9yX2lkPTAma2V5X2lkPTAmcmVwb19pZD0wIn0.xBjk94H8Rmc0s4z2esnk_j3Z93LQTW_hKZMvIkBM1hE">
+<img width="982" alt="스크린샷 2023-12-21 오후 4 29 01" src="https://github.com/Jeong-baechoo/s23embeddedproject/assets/54587781/03792d11-1a03-4d62-8f76-b8ff94726ecf">
+
 
 ### 2.1 사운드 감지 모듈
 
