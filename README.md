@@ -20,7 +20,7 @@
     - [5.1 Twilio API를 통한 SMS 알림 전송 기능](#51-twilio-api를-통한-sms-알림-전송-기능)
       - [5.1.1 Twilio 계정 정보 및 API 엔드포인트 설정](#511-twilio-계정-정보-및-api-엔드포인트-설정)
       - [5.1.2 SMS 메시지 내용 및 수신자 정보 설정](#512-sms-메시지-내용-및-수신자-정보-설정)
-      - [5.1.3 libcurl을 사용한 HTTP POST 요청 및 콜백 함수 정의](#513-libcurl을-사용한-http-post-요청-및-콜백-함수-정의)
+      - [5.1.3 libcurl을 사용한 HTTP POST 요청](#513-libcurl을-사용한-http-post-요청)
       - [5.1.4 Twilio API를 통한 SMS 전송 작동 원리](#514-twilio-api를-통한-sms-전송-작동-원리)
   - [6. 데모 영상](#6-데모-영상)
 
@@ -84,7 +84,6 @@ ___
    - 이로써 여러 스레드에서 동시에 해당 변수에 접근하는 것을 방지하고, 안전한 수정 및 공유 자원의 접근이 가능합니다.
 
 3. **동시 실행 제어**
-   - 아기 울음소리가 감지될 경우, 해당 값이 변하고 뮤텍스를 이용하여 동시에 여러 액추에이터 실행 함수들이 동작하지 않도록 제한하였습니다.
    - 각 액추에이터 실행 함수들은 동작을 마치면 자식 스레드로 돌아가 아기 울음소리 감지 함수를 다시 멀티 스레딩으로 수행합니다.
 
 이를 통해 시스템은 안전하게 여러 스레드 간의 작업을 조율하고, 공유 자원을 안전하게 활용할 수 있습니다.
@@ -139,15 +138,8 @@ const char* TWILIO_SMS_URL = "https://api.twilio.com/2010-04-01/Accounts/AC1bfb2
 const char* SMS_BODY = "아기가 울어요!";
 ```
 
-#### 5.1.3 libcurl을 사용한 HTTP POST 요청 및 콜백 함수 정의
+#### 5.1.3 libcurl을 사용한 HTTP POST 요청
 ```c
-// 콜백 함수
-size_t write_callback(void* contents, size_t size, size_t nmemb, void* userp) {
-    // 사용하지 않는 매개변수에 대한 경고를 없애기 위해 매개변수를 사용하지 않음을 명시
-    (void)contents;
-    (void)userp;
-    return size * nmemb;
-}
 
 // Twilio API를 통해 SMS를 전송하는 함수
 int sendsms() {
