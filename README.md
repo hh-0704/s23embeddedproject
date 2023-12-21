@@ -19,7 +19,7 @@
   - [5. 가산점 요소 구현](#5-가산점-요소-구현)
     - [5.1 Twilio API를 통한 SMS 알림 전송 기능](#51-twilio-api를-통한-sms-알림-전송-기능)
       - [5.1.1 Twilio 계정 정보 및 API 엔드포인트 설정](#511-twilio-계정-정보-및-api-엔드포인트-설정)
-      - [5.1.2 SMS 메시지 내용 및 수신자 정보 설정](#512-sms-메시지-내용-및-수신자-정보-설정)
+      - [5.1.2 SMS 메시지 내용 설정](#512-sms-메시지-내용-설정)
       - [5.1.3 libcurl을 사용한 HTTP POST 요청 및 콜백 함수 정의](#513-libcurl을-사용한-http-post-요청-및-콜백-함수-정의)
       - [5.1.4 Twilio API를 통한 SMS 전송 작동 원리](#514-twilio-api를-통한-sms-전송-작동-원리)
   - [6. 데모 영상](#6-데모-영상)
@@ -129,7 +129,7 @@ const char* TO_PHONE_NUMBER = "unknown";
 const char* TWILIO_SMS_URL = "https://api.twilio.com/2010-04-01/Accounts/AC1bfb25aab627bd95b5cd294e6981821d/Messages.json";
 ```
 
-#### 5.1.2 SMS 메시지 내용 및 수신자 정보 설정
+#### 5.1.2 SMS 메시지 내용 설정
 ```c
 // SMS 메시지 내용
 const char* SMS_BODY = "아기가 울어요!";
