@@ -98,26 +98,9 @@ ___
 
 ### 4.2 해결방안: 음압 데시벨을 통한 울음소리 감지 로직
 
-<div style="display:flex; justify-content:space-around;"  >
-  <figure style="text-align:center;">
-    <img src="https://private-user-images.githubusercontent.com/54587781/292126598-635e19cb-ff25-48c6-a6b0-b9b1468b94ee.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTEiLCJleHAiOjE3MDMxNDUwNzYsIm5iZiI6MTcwMzE0NDc3NiwicGF0aCI6Ii81NDU4Nzc4MS8yOTIxMjY1OTgtNjM1ZTE5Y2ItZmYyNS00OGM2LWE2YjAtYjliMTQ2OGI5NGVlLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFJV05KWUFYNENTVkVINTNBJTJGMjAyMzEyMjElMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjMxMjIxVDA3NDYxNlomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTc2OWZkNjBhYjA5MTU0MDdmNzg2YzgxZTdmZjJkMTU3NjRhYzA1NjI3ZmVkNDMzYmQ5MjA1MTYyNmJkMTJlOWYmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JmFjdG9yX2lkPTAma2V5X2lkPTAmcmVwb19pZD0wIn0.I1LvuNYHa5WC8MhA59_bIl-03IB8sHk4CDyJ5xJpR9A"
-       style="width: 100%;">
-    <figcaption style="text-align:center; font-size:15px; color:#808080">
-      사운드 측정 전
-    </figcaption>
-  </figure>
-
-  <figure style="text-align:center;">
-    <img src="https://private-user-images.githubusercontent.com/54587781/292126620-50bd89cc-5328-44c2-b9a0-483f48047272.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTEiLCJleHAiOjE3MDMxNDUwNzYsIm5iZiI6MTcwMzE0NDc3NiwicGF0aCI6Ii81NDU4Nzc4MS8yOTIxMjY2MjAtNTBiZDg5Y2MtNTMyOC00NGMyLWI5YTAtNDgzZjQ4MDQ3MjcyLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFJV05KWUFYNENTVkVINTNBJTJGMjAyMzEyMjElMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjMxMjIxVDA3NDYxNlomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPWRiODQ2YTUxYTVjNDdlYjQ1YTQ2ZDdmMzA4ZDlkMTEzMjBkYjBhNTc4ZTYyNjYyZTMxZjVhZTJiMWJjZjRkODQmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JmFjdG9yX2lkPTAma2V5X2lkPTAmcmVwb19pZD0wIn0.3t_u4n4IDCEThVUy1hldClAkVmosBgEx_8ic-2lGpr8"
-       style="width: 100%;">
-    <figcaption style="text-align:center; font-size:15px; color:#808080">
-      사운드 측정 후
-    </figcaption>
-  </figure>
-</div>
-
-
-
+| ![space-1.jpg](https://private-user-images.githubusercontent.com/54587781/292126598-635e19cb-ff25-48c6-a6b0-b9b1468b94ee.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTEiLCJleHAiOjE3MDMxNDUwNzYsIm5iZiI6MTcwMzE0NDc3NiwicGF0aCI6Ii81NDU4Nzc4MS8yOTIxMjY1OTgtNjM1ZTE5Y2ItZmYyNS00OGM2LWE2YjAtYjliMTQ2OGI5NGVlLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFJV05KWUFYNENTVkVINTNBJTJGMjAyMzEyMjElMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjMxMjIxVDA3NDYxNlomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTc2OWZkNjBhYjA5MTU0MDdmNzg2YzgxZTdmZjJkMTU3NjRhYzA1NjI3ZmVkNDMzYmQ5MjA1MTYyNmJkMTJlOWYmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JmFjdG9yX2lkPTAma2V5X2lkPTAmcmVwb19pZD0wIn0.I1LvuNYHa5WC8MhA59_bIl-03IB8sHk4CDyJ5xJpR9A) | ![image](https://private-user-images.githubusercontent.com/54587781/292126620-50bd89cc-5328-44c2-b9a0-483f48047272.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTEiLCJleHAiOjE3MDMxNDUwNzYsIm5iZiI6MTcwMzE0NDc3NiwicGF0aCI6Ii81NDU4Nzc4MS8yOTIxMjY2MjAtNTBiZDg5Y2MtNTMyOC00NGMyLWI5YTAtNDgzZjQ4MDQ3MjcyLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFJV05KWUFYNENTVkVINTNBJTJGMjAyMzEyMjElMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjMxMjIxVDA3NDYxNlomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPWRiODQ2YTUxYTVjNDdlYjQ1YTQ2ZDdmMzA4ZDlkMTEzMjBkYjBhNTc4ZTYyNjYyZTMxZjVhZTJiMWJjZjRkODQmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JmFjdG9yX2lkPTAma2V5X2lkPTAmcmVwb19pZD0wIn0.3t_u4n4IDCEThVUy1hldClAkVmosBgEx_8ic-2lGpr8)|
+|:--:|:--:|
+| *사운드 측정 전* | *사운드 측정 후* |
 - 원인 분석: 사운드 센서의 아날로그 값의 변동폭이 작아 라즈베리파이에서 FFT 분석에 부적합한 것으로 확인되었습니다. 성인 남성이 큰 소리로 말해도 아날로그 값의 변동이 제한적이었습니다.
 
 - 대안 채택: 이에 대한 대안으로 사운드 센서의 아날로그 값을 직접 FFT 분석하는 것이 아닌, 음압 데시벨을 통한 울음소리 감지 로직으로 변경하였습니다. 이는 라즈베리파이의 개발환경에서 민감한 감지가 가능하도록 하였습니다.
